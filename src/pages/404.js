@@ -1,17 +1,68 @@
-const NotFoundPage = () => (
-    <div className="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
-        <div className="max-w-xl mx-auto sm:px-6 lg:px-8">
-            <div className="flex items-center pt-8 sm:justify-start sm:pt-0">
-                <div className="px-4 text-lg text-gray-500 border-r border-gray-400 tracking-wider">
-                    404
-                </div>
+import {
+    Button,
+    Drawer,
+    DrawerBody,
+    DrawerCloseButton,
+    DrawerContent,
+    DrawerFooter,
+    DrawerHeader,
+    DrawerOverlay,
+    Tab,
+    TabList,
+    TabPanel,
+    TabPanels,
+    Tabs,
+    useDisclosure,
+} from '@chakra-ui/react'
+import { useRef } from 'react'
 
-                <div className="ml-4 text-lg text-gray-500 uppercase tracking-wider">
-                    Not Found
-                </div>
-            </div>
-        </div>
-    </div>
-)
+const NotFoundPage = () => {
+    const { isOpen, onOpen, onClose } = useDisclosure()
+    const btnRef = useRef()
+
+    return (
+        <>
+            <Button ref={btnRef} colorScheme="teal" onClick={onOpen}>
+                食材選択
+            </Button>
+            <Drawer isOpen={isOpen} placement="top" onClose={onClose} finalFocusRef={btnRef}>
+                <DrawerOverlay />
+                <DrawerContent>
+                    <DrawerCloseButton />
+                    <DrawerHeader>食材を選択してください</DrawerHeader>
+
+                    <DrawerBody>
+                        <Tabs h="400px" isFitted variant="enclosed">
+                            <TabList>
+                                <Tab>肉</Tab>
+                                <Tab>魚</Tab>
+                                <Tab>野菜</Tab>
+                            </TabList>
+
+                            <TabPanels>
+                                <TabPanel>
+                                    <p>one!</p>
+                                </TabPanel>
+                                <TabPanel>
+                                    <p>two!</p>
+                                </TabPanel>
+                                <TabPanel>
+                                    <p>three!</p>
+                                </TabPanel>
+                            </TabPanels>
+                        </Tabs>
+                    </DrawerBody>
+
+                    <DrawerFooter>
+                        <Button variant="outline" mr={3} onClick={onClose}>
+                            Cancel
+                        </Button>
+                        <Button colorScheme="blue">Save</Button>
+                    </DrawerFooter>
+                </DrawerContent>
+            </Drawer>
+        </>
+    )
+}
 
 export default NotFoundPage

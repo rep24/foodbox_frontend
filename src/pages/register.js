@@ -1,121 +1,162 @@
-import ApplicationLogo from '@/components/ApplicationLogo'
-import AuthCard from '@/components/AuthCard'
-import AuthValidationErrors from '@/components/AuthValidationErrors'
-import Button from '@/components/Button'
-import GuestLayout from '@/components/Layouts/GuestLayout'
-import Input from '@/components/Input'
-import Label from '@/components/Label'
-import Link from 'next/link'
+import {
+    Box,
+    Center,
+    FormControl,
+    FormErrorMessage,
+    FormLabel,
+    Input,
+    Stack,
+    Text,
+    useColorModeValue,
+} from '@chakra-ui/react'
+import Wrap from '../components/template/Wrap'
+import React, { memo } from 'react'
+import PrimaryButton from '../components/atoms/PrimaryButton'
 import { useAuth } from '@/hooks/auth'
-import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import HeaderLayout from '@/components/template/HeaderLayout'
 
-const Register = () => {
-    const { register } = useAuth({
+const Login = memo(() => {
+    const { regist } = useAuth({
         middleware: 'guest',
-        redirectIfAuthenticated: '/dashboard',
+        redirectIfAuthenticated: '/home',
     })
 
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [passwordConfirmation, setPasswordConfirmation] = useState('')
-    const [errors, setErrors] = useState([])
+    const {
+        handleSubmit,
+        register,
+        formState: { errors, isSubmitting },
+        getValues,
+    } = useForm()
 
-    const submitForm = event => {
-        event.preventDefault()
-
-        register({ name, email, password, password_confirmation: passwordConfirmation, setErrors })
+    const onSubmit = data => {
+        regist({
+            name: data.name,
+            email: data.email,
+            password: data.password,
+            password_confirmation: data.passwordConfirmation,
+        })
     }
 
     return (
-        <GuestLayout>
-            <AuthCard
-                logo={
-                    <Link href="/">
-                        <a>
-                            <ApplicationLogo className="w-20 h-20 fill-current text-gray-500" />
-                        </a>
-                    </Link>
-                }>
-                {/* Validation Errors */}
-                <AuthValidationErrors className="mb-4" errors={errors} />
+        <HeaderLayout>
+            <Box h="100vh" w="100%" objectFit="cover" bgRepeat="no-repeat" backgroundImage="/images/bg1.jpg">
+                <Box
+                    h="100%"
+                    bgGradient={useColorModeValue(
+                        'linear(to-r,rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8))',
+                        'linear(to-r,rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8))',
+                    )}
+                    alignItems="center"
+                    textAlign="left">
+                    <Wrap>
+                        <Center pt="70px" pb="70px">
+                            <Text
+                                color={useColorModeValue('gray.600', 'purple.50')}
+                                fontWeight="bold"
+                                fontSize="3rem"
+                                mb="2">
+                                ユーザー登録
+                            </Text>
+                        </Center>
 
-                <form onSubmit={submitForm}>
-                    {/* Name */}
-                    <div>
-                        <Label htmlFor="name">Name</Label>
+                        <Center mb="70px">
+                            <Box
+                                width="50%"
+                                color="gray.800"
+                                bg="rgba(255,255,255,0.9)"
+                                borderRadius="10"
+                                pr="2rem"
+                                pl="2rem"
+                                pt="3rem"
+                                pb="3rem">
+                                <form onSubmit={handleSubmit(onSubmit)}>
+                                    <Stack spacing={4} mb="40px">
+                                        <FormControl isInvalid={errors.name}>
+                                            <FormLabel>name</FormLabel>
+                                            <Input
+                                                id="name"
+                                                type="text"
+                                                bg="white"
+                                                onChange={event => setEmail(event.target.value)}
+                                                {...register('name', {
+                                                    required: 'nameは必須です。',
+                                                })}
+                                            />
+                                            <FormErrorMessage>{errors.name && errors.name.message}</FormErrorMessage>
+                                        </FormControl>
 
-                        <Input
-                            id="name"
-                            type="text"
-                            value={name}
-                            className="block mt-1 w-full"
-                            onChange={event => setName(event.target.value)}
-                            required
-                            autoFocus
-                        />
-                    </div>
+                                        <FormControl isInvalid={errors.email}>
+                                            <FormLabel>email</FormLabel>
+                                            <Input
+                                                id="email"
+                                                type="email"
+                                                bg="white"
+                                                onChange={event => setEmail(event.target.value)}
+                                                {...register('email', {
+                                                    required: 'emailは必須です。',
+                                                })}
+                                            />
+                                            <FormErrorMessage>{errors.email && errors.email.message}</FormErrorMessage>
+                                        </FormControl>
 
-                    {/* Email Address */}
-                    <div className="mt-4">
-                        <Label htmlFor="email">Email</Label>
+                                        <FormControl isInvalid={errors.password}>
+                                            <FormLabel>password</FormLabel>
+                                            <Input
+                                                id="password"
+                                                type="password"
+                                                bg="white"
+                                                onChange={event => setPassword(event.target.value)}
+                                                {...register('password', {
+                                                    required: 'passwordは必須です。',
+                                                })}
+                                                autoComplete="current-password"
+                                            />
+                                            <FormErrorMessage>
+                                                {errors.password && errors.password.message}
+                                            </FormErrorMessage>
+                                        </FormControl>
 
-                        <Input
-                            id="email"
-                            type="email"
-                            value={email}
-                            className="block mt-1 w-full"
-                            onChange={event => setEmail(event.target.value)}
-                            required
-                        />
-                    </div>
-
-                    {/* Password */}
-                    <div className="mt-4">
-                        <Label htmlFor="password">Password</Label>
-
-                        <Input
-                            id="password"
-                            type="password"
-                            value={password}
-                            className="block mt-1 w-full"
-                            onChange={event => setPassword(event.target.value)}
-                            required
-                            autoComplete="new-password"
-                        />
-                    </div>
-
-                    {/* Confirm Password */}
-                    <div className="mt-4">
-                        <Label htmlFor="passwordConfirmation">
-                            Confirm Password
-                        </Label>
-
-                        <Input
-                            id="passwordConfirmation"
-                            type="password"
-                            value={passwordConfirmation}
-                            className="block mt-1 w-full"
-                            onChange={event =>
-                                setPasswordConfirmation(event.target.value)
-                            }
-                            required
-                        />
-                    </div>
-
-                    <div className="flex items-center justify-end mt-4">
-                        <Link href="/login">
-                            <a className="underline text-sm text-gray-600 hover:text-gray-900">
-                                Already registered?
-                            </a>
-                        </Link>
-
-                        <Button className="ml-4">Register</Button>
-                    </div>
-                </form>
-            </AuthCard>
-        </GuestLayout>
+                                        <FormControl isInvalid={errors.passwordConfirmation}>
+                                            <FormLabel>Confirm password</FormLabel>
+                                            <Input
+                                                id="passwordConfirmation"
+                                                type="passwordConfirmation"
+                                                bg="white"
+                                                onChange={event => setPassword(event.target.value)}
+                                                {...register('passwordConfirmation', {
+                                                    required: 'passwordConfirmationは必須です。',
+                                                    validate: value => {
+                                                        return (
+                                                            value === getValues('password') ||
+                                                            'パスワードが一致しません。'
+                                                        )
+                                                    },
+                                                })}
+                                            />
+                                            <FormErrorMessage>
+                                                {errors.passwordConfirmation && errors.passwordConfirmation.message}
+                                            </FormErrorMessage>
+                                        </FormControl>
+                                    </Stack>
+                                    <Center flexDir="column">
+                                        <PrimaryButton
+                                            isLoading={isSubmitting}
+                                            type="submit"
+                                            bg="teal.400"
+                                            width={'180px'}
+                                            height={'50px'}>
+                                            登録
+                                        </PrimaryButton>
+                                    </Center>
+                                </form>
+                            </Box>
+                        </Center>
+                    </Wrap>
+                </Box>
+            </Box>
+        </HeaderLayout>
     )
-}
+})
 
-export default Register
+export default Login

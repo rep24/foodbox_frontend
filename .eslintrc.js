@@ -7,11 +7,7 @@ module.exports = {
         es6: true,
         commonjs: true,
     },
-    extends: [
-        'eslint:recommended',
-        'plugin:react/recommended',
-        'plugin:prettier/recommended',
-    ],
+    extends: ['eslint:recommended', 'plugin:react/recommended', 'plugin:prettier/recommended'],
     parserOptions: {
         ecmaFeatures: {
             jsx: true,
@@ -38,6 +34,6 @@ module.exports = {
         'react/react-in-jsx-scope': 0,
         'linebreak-style': ['error', 'unix'],
         semi: ['error', 'never'],
-        'prettier/prettier': ['error', { "endOfLine": "off" }, { usePrettierrc: true }],
+        'prettier/prettier': ['error', { endOfLine: 'off' }, { usePrettierrc: true }],
     },
 }
