@@ -1,3 +1,5 @@
+import PrimaryModal from '@/components/atoms/PrimaryModal'
+import useFoods from '@/hooks/useFoods'
 import {
     Button,
     Drawer,
@@ -7,6 +9,7 @@ import {
     DrawerFooter,
     DrawerHeader,
     DrawerOverlay,
+    Image,
     Tab,
     TabList,
     TabPanel,
@@ -14,11 +17,17 @@ import {
     Tabs,
     useDisclosure,
 } from '@chakra-ui/react'
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 
 const NotFoundPage = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
+    const { createFood, foodIndex, foods } = useFoods()
     const btnRef = useRef()
+
+    useEffect(() => {
+        foodIndex()
+        console.log(foods)
+    }, [foodIndex])
 
     return (
         <>
@@ -41,7 +50,18 @@ const NotFoundPage = () => {
 
                             <TabPanels>
                                 <TabPanel>
-                                    <p>one!</p>
+                                    {foods ? (
+                                        foods.map(item => (
+                                            <>
+                                                <option key={item.id} value={item.id}>
+                                                    {item.name}
+                                                </option>
+                                                <Image src={item.image} w="5rem" />
+                                            </>
+                                        ))
+                                    ) : (
+                                        <option></option>
+                                    )}
                                 </TabPanel>
                                 <TabPanel>
                                     <p>two!</p>
@@ -61,6 +81,7 @@ const NotFoundPage = () => {
                     </DrawerFooter>
                 </DrawerContent>
             </Drawer>
+            <PrimaryModal />
         </>
     )
 }

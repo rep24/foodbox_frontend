@@ -7,6 +7,11 @@ import useMessage from './useMessage'
 const useFoods = () => {
     const [selectedFood, setSelectedFood] = useState(null)
     const [foods, setFoods] = useState()
+    const [beef, setBeef] = useState()
+    const [fish, setFish] = useState()
+    const [vegetable, setVegetable] = useState()
+    const [fruit, setFruit] = useState()
+    const [bread, setBread] = useState()
 
     //選択された食材を特定してモーダル表示
     const onSelectFood = useCallback(props => {
@@ -81,6 +86,11 @@ const useFoods = () => {
             .get('api/foods')
             .then(res => {
                 setFoods(res.data ?? null)
+                setBeef(res.data.filter(food => food.parent_id === 10))
+                setFish(res.data.filter(food => food.parent_id === 11))
+                setVegetable(res.data.filter(food => food.parent_id === 12))
+                setBread(res.data.filter(food => food.parent_id === 22))
+                setFruit(res.data.filter(food => food.parent_id === 34))
             })
             .catch(err => {
                 console.log(err)
@@ -95,6 +105,11 @@ const useFoods = () => {
         createFood,
         foodIndex,
         foods,
+        beef,
+        fish,
+        vegetable,
+        bread,
+        fruit,
     }
 }
 

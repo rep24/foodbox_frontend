@@ -7,16 +7,14 @@ const useRecipe = () => {
     const [suggestRecipe, setSuggestRecipe] = useState()
 
     const getRankerRecipe = useCallback(() => {
-        setTimeout(() => {
-            axios
-                .get(process.env.NEXT_PUBLIC_API_KEY1)
-                .then(res => {
-                    setRankerRecipe(res.data.result)
-                })
-                .catch(err => {
-                    console.log(err)
-                })
-        }, 1000)
+        axios
+            .get(process.env.NEXT_PUBLIC_API_KEY1)
+            .then(res => {
+                setRankerRecipe(res.data.result)
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }, [])
 
     const getSuggestRecipe = useCallback(() => {
@@ -29,7 +27,7 @@ const useRecipe = () => {
                 .catch(err => {
                     console.log(err)
                 })
-        }, 3000)
+        }, 2000)
     }, [])
 
     return { getRankerRecipe, rankerRecipe, getSuggestRecipe, suggestRecipe }

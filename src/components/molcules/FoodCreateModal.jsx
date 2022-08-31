@@ -1,42 +1,40 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
-import {
-    FormControl,
-    FormErrorMessage,
-    FormLabel,
-    Input,
-    ModalBody,
-    ModalFooter,
-    Select,
-    Stack,
-} from '@chakra-ui/react'
+import { FormControl, FormErrorMessage, FormLabel, Input, ModalBody, ModalFooter, Stack } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
 import PrimaryButton from '../atoms/PrimaryButton'
 import PrimaryModal from '../atoms/PrimaryModal'
 
-import { useAuth } from '@/hooks/auth'
 import useFoods from '../../hooks/useFoods'
+import { useAuth } from '@/hooks/auth'
+import FoodTab from './FoodTab'
 
 const FoodCreateModal = props => {
     const { isOpen, onClose, Close } = props
 
-    const { createFood, foodIndex, foods } = useFoods()
+    const [clickItem, setClickItem] = useState()
     const { user } = useAuth()
+
+    const { createFood, foodIndex, beef, fish, vegetable, bread, fruit } = useFoods()
 
     const {
         handleSubmit,
         register,
+        setValue,
         reset,
         formState: { errors, isSubmitting },
     } = useForm()
 
     useEffect(() => {
+        console.log('エフェクト！')
+        setClickItem()
         reset()
         foodIndex()
     }, [reset, foodIndex, props])
 
     //登録ボタンを押したときの処理
     const onSubmitNew = data => {
+        console.log(data.food)
         createFood({
             user_id: user.id,
             food_id: data.food,
@@ -53,29 +51,20 @@ const FoodCreateModal = props => {
             <form onSubmit={handleSubmit(onSubmitNew)}>
                 <ModalBody>
                     <Stack spacing={4}>
-                        <FormControl isInvalid={errors.food}>
-                            <FormLabel>食材を選択(必須)</FormLabel>
-                            <Select
-                                id="food"
-                                placeholder="食材を選択してください。"
-                                {...register('food')}
-                                bg="green.100"
-                                border="none">
-                                {foods ? (
-                                    foods.map(item => (
-                                        <option key={item.id} value={item.id}>
-                                            {item.name}
-                                        </option>
-                                    ))
-                                ) : (
-                                    <option></option>
-                                )}
-                            </Select>
-                            <FormErrorMessage>{errors.deadline && errors.deadline.message}</FormErrorMessage>
-                        </FormControl>
+                        <FormLabel mb="-1">食材を選択(必須)</FormLabel>
+                        <FoodTab
+                            clickItem={clickItem}
+                            setClickItem={setClickItem}
+                            setValue={setValue}
+                            beef={beef}
+                            fish={fish}
+                            vegetable={vegetable}
+                            fruit={fruit}
+                            bread={bread}
+                        />
 
                         <FormControl isInvalid={errors.deadline}>
-                            <FormLabel>賞味期限を入力(必須)</FormLabel>
+                            <FormLabel pt="3.5rem">賞味期限を入力(必須)</FormLabel>
                             <Input
                                 id="deadline"
                                 placeholder="2022-01-01"

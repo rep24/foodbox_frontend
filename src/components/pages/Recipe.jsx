@@ -6,6 +6,8 @@ import RecipeCard from '../atoms/RecipeCard'
 import Wrap from '../template/Wrap'
 import useRecipe from '../../hooks/useRecipe'
 
+export async function getStaticProps() {}
+
 const Recipe = memo(() => {
     const { getRankerRecipe, rankerRecipe, getSuggestRecipe, suggestRecipe } = useRecipe()
 
