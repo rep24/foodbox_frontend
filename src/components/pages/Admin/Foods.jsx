@@ -15,7 +15,6 @@ const Foods = () => {
     useEffect(() => {
         setdeleted(false)
         foodIndex()
-        console.log(foods)
     }, [deleted])
 
     return (

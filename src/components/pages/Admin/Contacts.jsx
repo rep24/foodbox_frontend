@@ -1,17 +1,26 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
-import { Box, Flex, Grid, Spinner, Text } from '@chakra-ui/react'
+import { Box, Flex, Grid, Spinner, Text, useDisclosure } from '@chakra-ui/react'
 
 import useContact from '@/hooks/useContact'
+import DeleteDialog from '@/components/molcules/DeleteDialog'
 
 const Contacts = () => {
     const { getContacts, contacts, deleteContact } = useContact()
-    const [deleted, setdeleted] = useState(false)
+    const [deleted, setDeleted] = useState(false)
+    const [deleteId, setDeleteId] = useState()
+
+    const { isOpen, onOpen, onClose } = useDisclosure()
+
+    const onClickDelete = id => {
+        setDeleteId(id)
+        onOpen()
+    }
 
     useEffect(() => {
-        setdeleted(false)
+        setDeleteId()
+        setDeleted(false)
         getContacts()
-        console.log(contacts)
     }, [deleted])
 
     return (
@@ -38,10 +47,7 @@ const Contacts = () => {
                                     color="#FF3975"
                                     fontWeight="bold"
                                     cursor="pointer"
-                                    onClick={() => {
-                                        deleteContact(contact.id)
-                                        setdeleted(true)
-                                    }}>
+                                    onClick={() => onClickDelete(contact.id)}>
                                     完了
                                 </Text>
                             </Flex>
@@ -51,6 +57,13 @@ const Contacts = () => {
                     <Spinner thickness="3px" size="xl" color="#FF3975" />
                 )}
             </Grid>
+            <DeleteDialog
+                isOpen={isOpen}
+                onClose={onClose}
+                deleteMethod={deleteContact}
+                deleteId={deleteId}
+                setDeleted={setDeleted}
+            />
         </>
     )
 }

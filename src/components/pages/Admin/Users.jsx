@@ -8,7 +8,7 @@ const Users = () => {
         <Grid overflow="auto" h="600px" w="100%" mb={3}>
             {users ? (
                 users.map(user => (
-                    <Flex borderBottom="1px solid #11B7DA" pb={2}>
+                    <Flex borderBottom="1px solid #11B7DA" pb={2} key={user.id}>
                         <Box w="100%">
                             <Flex color="white" textAlign="center" alignItems="end">
                                 <Text fontSize={'2xl'} mr={6}>
