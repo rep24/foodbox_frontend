@@ -8,8 +8,8 @@ const Users = () => {
         <Grid overflow="auto" h="600px" w="100%" mb={3}>
             {users ? (
                 users.map(user => (
-                    <Flex borderBottom="1px solid #11B7DA" pb={2} key={user.id}>
-                        <Box w="100%">
+                    <Flex pb={2} key={user.id}>
+                        <Box w="100%" borderBottom="1px solid #11B7DA">
                             <Flex color="white" textAlign="center" alignItems="end">
                                 <Text fontSize={'2xl'} mr={6}>
                                     ID: {user.id}
@@ -25,11 +25,8 @@ const Users = () => {
                                     {user.email}
                                 </Text>
                                 <Flex>
-                                    <Text color="#11B7DA" fontWeight="bold" mr={3}>
+                                    <Text color="#11B7DA" fontWeight="bold" mr="1rem">
                                         編集
-                                    </Text>
-                                    <Text color="#FF3975" fontWeight="bold">
-                                        削除
                                     </Text>
                                 </Flex>
                             </Flex>

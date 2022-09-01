@@ -1,20 +1,14 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 import { useForm } from 'react-hook-form'
-import { FormControl, FormErrorMessage, FormLabel, Input, ModalBody, ModalFooter, Stack } from '@chakra-ui/react'
+import { FormControl, FormErrorMessage, FormLabel, Image, Input, ModalBody, ModalFooter, Stack } from '@chakra-ui/react'
 
-import useFoods from '../../hooks/useFoods'
 import PrimaryButton from '../atoms/PrimaryButton'
 import PrimaryModal from '../atoms/PrimaryModal'
+import useAdmin from '@/hooks/useAdmin'
 
 const AdminFoodModal = props => {
-    const { isOpen, onClose, food, Close } = props
-
-    const [id, setId] = useState('')
-    const [name, setName] = useState('')
-    const [imageUrl, setImageUrl] = useState('')
-    const [deadline, setDeadline] = useState('')
-    const [memo, setMemo] = useState('')
+    const { isOpen, onClose, Close, selectedTarget } = props
 
     const {
         handleSubmit,
@@ -23,83 +17,113 @@ const AdminFoodModal = props => {
         formState: { errors, isSubmitting },
     } = useForm()
 
+    const { editFood } = useAdmin()
+
+    const [food, setFood] = useState('')
+    const [image, setImage] = useState('')
+    const [categoryId, setCategoryId] = useState('')
+    const [parentId, setParentId] = useState('')
+
     useEffect(() => {
         reset()
-        setId(food?.id ?? '')
-        setName(food?.name ?? '')
-        setDeadline(food?.deadline ?? '')
-        setMemo(food?.memo ?? '')
-        setImageUrl(food?.image ?? '')
-    }, [food, id])
+        setFood(selectedTarget?.name ?? '')
+        setImage(selectedTarget?.image ?? '')
+        setCategoryId(selectedTarget?.category_id ?? '')
+        setParentId(selectedTarget?.parent_id ?? '')
+    }, [selectedTarget])
 
-    const { addFood, deleteFood } = useFoods()
-
-    const onChangeDeadline = e => {
-        setDeadline(e.target.value)
+    const onChangeFood = e => {
+        setFood(e.target.value)
     }
-    const onChangeMemo = e => {
-        setMemo(e.target.value)
+    const onChangeImage = e => {
+        setImage(e.target.value)
+    }
+    const onChangeCategoryId = e => {
+        setCategoryId(e.target.value)
+    }
+    const onChangeParentId = e => {
+        setParentId(e.target.value)
     }
 
-    //更新ボタンを押したときの処理
     const onSubmit = data => {
-        addFood({ id: id, deadline: data.deadline, memo: data.memo })
+        editFood({
+            id: data.id,
+            name: data.name,
+            image: data.image,
+            categoryId: data.categoryId,
+            parentId: data.parentId,
+        })
         onClose()
         Close(true)
     }
 
     return (
-        <PrimaryModal isOpen={isOpen} onClose={onClose} title={name}>
-            {/* <Image boxSize="80%" m="auto" borderRadius="5px" src={imageUrl} /> */}
+        <PrimaryModal isOpen={isOpen} onClose={onClose} title={food}>
+            <Image boxSize="80%" m="auto" borderRadius="5px" src={image} />
             <form onSubmit={handleSubmit(onSubmit)}>
-                <FormControl isInvalid={id}>
-                    <Input type="hidden" id="id" value={id} {...register('id')} />
+                <FormControl isInvalid={errors.id}>
+                    <Input type="hidden" id="id" value={'1'} {...register('id')} />
                 </FormControl>
                 <ModalBody>
                     <Stack spacing={4}>
-                        <FormControl isInvalid={errors.deadline}>
+                        <FormControl isInvalid={errors.name}>
                             <FormLabel>食材名</FormLabel>
                             <Input
                                 id="food"
-                                value={deadline}
-                                {...register('deadline', {
+                                value={food}
+                                {...register('name', {
                                     required: '食材名は必須です。',
                                 })}
-                                onChange={onChangeDeadline}
+                                onChange={onChangeFood}
                                 bg="green.100"
                                 border="none"
                             />
-                            <FormErrorMessage>{errors.deadline && errors.deadline.message}</FormErrorMessage>
+                            <FormErrorMessage>{errors.food && errors.food.message}</FormErrorMessage>
                         </FormControl>
 
-                        <FormControl isInvalid={'xxx'}>
-                            <FormLabel>カテゴリーid</FormLabel>
-                            <Input
-                                id="xxx"
-                                value={'xxx'}
-                                {...register('xxx', {
-                                    required: 'xxx',
-                                })}
-                                onChange={'xxx'}
-                                bg="green.100"
-                                border="none"
-                            />
-                            <FormErrorMessage>{/* {errors.memo && errors.memo.message} */}</FormErrorMessage>
-                        </FormControl>
-
-                        <FormControl isInvalid={errors.memo}>
+                        <FormControl isInvalid={errors.image}>
                             <FormLabel>画像URL</FormLabel>
                             <Input
-                                id="memo"
-                                value={memo}
-                                {...register('memo', {
+                                id="image"
+                                value={image}
+                                {...register('image', {
                                     required: '画像URLは必須です。',
                                 })}
-                                onChange={onChangeMemo}
+                                onChange={onChangeImage}
                                 bg="green.100"
                                 border="none"
                             />
-                            <FormErrorMessage>{errors.memo && errors.memo.message}</FormErrorMessage>
+                            <FormErrorMessage>{errors.image && errors.image.message}</FormErrorMessage>
+                        </FormControl>
+
+                        <FormControl isInvalid={errors.categoryId}>
+                            <FormLabel>カテゴリーid</FormLabel>
+                            <Input
+                                id="categoryId"
+                                value={categoryId}
+                                {...register('categoryId', {
+                                    required: 'categoryIdは必須です。',
+                                })}
+                                onChange={onChangeCategoryId}
+                                bg="green.100"
+                                border="none"
+                            />
+                            <FormErrorMessage>{errors.categoryId && errors.categoryId.message}</FormErrorMessage>
+                        </FormControl>
+
+                        <FormControl isInvalid={errors.parentId}>
+                            <FormLabel>親カテゴリーid</FormLabel>
+                            <Input
+                                id="parentId"
+                                value={parentId}
+                                {...register('parentId', {
+                                    required: 'parentIdは必須です。',
+                                })}
+                                onChange={onChangeParentId}
+                                bg="green.100"
+                                border="none"
+                            />
+                            <FormErrorMessage>{errors.parentId && errors.parentId.message}</FormErrorMessage>
                         </FormControl>
                     </Stack>
                 </ModalBody>

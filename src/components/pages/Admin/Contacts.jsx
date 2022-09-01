@@ -31,22 +31,26 @@ const Contacts = () => {
                         <Box w="100%" mb={3} key={contact.id}>
                             <Flex color="white" textAlign="center" alignItems="end">
                                 <Text fontSize={'2xl'} mr={6}>
-                                    ユーザーID: {contact.user_id}
+                                    お問い合わせID: {contact.id}
+                                </Text>
+                                <Text fontSize={'sm'} mr="1rem">
+                                    ユーザーID:{contact.user_id}
                                 </Text>
                                 <Text fontSize={'sm'}>{contact.created_at}</Text>
                             </Flex>
                             <Flex
                                 justify="space-between"
-                                textAlign="center"
+                                textAlign="left"
                                 alignItems="center"
                                 borderBottom="1px solid #11B7DA">
-                                <Text color="white" fontSize={'lg'}>
+                                <Text color="white" width="92%" fontSize={'lg'}>
                                     {contact.body}
                                 </Text>
                                 <Text
                                     color="#FF3975"
                                     fontWeight="bold"
                                     cursor="pointer"
+                                    mr="1rem"
                                     onClick={() => onClickDelete(contact.id)}>
                                     完了
                                 </Text>
@@ -63,6 +67,7 @@ const Contacts = () => {
                 deleteMethod={deleteContact}
                 deleteId={deleteId}
                 setDeleted={setDeleted}
+                message={`お問い合わせID:${deleteId}を削除しようとしています。`}
             />
         </>
     )

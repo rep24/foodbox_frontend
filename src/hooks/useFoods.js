@@ -59,7 +59,7 @@ const useFoods = () => {
         [showMessage],
     )
 
-    //食材を追加
+    //Boxに食材を追加
     const createFood = useCallback(
         props => {
             const { user_id, food_id, deadline, memo } = props

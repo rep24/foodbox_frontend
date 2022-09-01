@@ -20,6 +20,7 @@ const Recipe = memo(() => {
                 <Text color={useColorModeValue('gray.600', 'purple.50')} fontWeight="bold" fontSize="3xl" mb="2">
                     人気のレシピ(外部サイト)
                 </Text>
+
                 <Grid
                     templateColumns={{
                         base: 'repeat(4,1fr)',

@@ -10,7 +10,7 @@ import {
 import React, { memo } from 'react'
 
 const DeleteDialog = memo(props => {
-    const { isOpen, onClose, setDeleted, deleteId, deleteMethod } = props
+    const { isOpen, onClose, setDeleted, deleteId, deleteMethod, message } = props
 
     const cancelRef = React.useRef()
     return (
@@ -19,9 +19,9 @@ const DeleteDialog = memo(props => {
                 s
                 <AlertDialogContent>
                     <AlertDialogHeader fontSize="lg" fontWeight="bold">
-                        一覧から選択したデータを削除しますか？
+                        選択したデータを一覧から削除しますか？
                     </AlertDialogHeader>
-
+                    {message ? <AlertDialogBody fontSize={'sm'}>{message}</AlertDialogBody> : <></>}
                     <AlertDialogFooter>
                         <Button ref={cancelRef} onClick={onClose}>
                             Cancel

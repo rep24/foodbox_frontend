@@ -20,13 +20,13 @@ const FoodTab = props => {
                         h="200px"
                         w="100%"
                         templateColumns={{
-                            base: 'repeat(4,1fr)',
-                            md: 'repeat(4,1fr)',
+                            base: 'repeat(3,1fr)',
+                            md: 'repeat(3,1fr)',
                         }}>
                         {beef ? (
                             beef.map(item => (
                                 <GridItem
-                                    w="80px"
+                                    w="100px"
                                     mb="0.75rem"
                                     pr="0.2rem"
                                     key={item.id}
@@ -37,7 +37,7 @@ const FoodTab = props => {
                                     }}
                                     opacity={clickItem === item.id && 0.5}>
                                     <Text fontSize={'xs'}>{item.name}</Text>
-                                    <Image src={item.image} h="3rem" objectFit={'contain'} />
+                                    <Image src={item.image} h="4rem" objectFit={'contain'} />
                                 </GridItem>
                             ))
                         ) : (
@@ -51,13 +51,13 @@ const FoodTab = props => {
                         h="200px"
                         w="100%"
                         templateColumns={{
-                            base: 'repeat(4,1fr)',
-                            md: 'repeat(4,1fr)',
+                            base: 'repeat(3,1fr)',
+                            md: 'repeat(3,1fr)',
                         }}>
                         {fish ? (
                             fish.map(item => (
                                 <GridItem
-                                    w="80px"
+                                    w="100px"
                                     mb="0.75rem"
                                     pr="0.2rem"
                                     key={item.id}
@@ -68,7 +68,7 @@ const FoodTab = props => {
                                     }}
                                     opacity={clickItem === item.id && 0.5}>
                                     <Text fontSize={'xs'}>{item.name}</Text>
-                                    <Image src={item.image} h="3rem" objectFit={'contain'} />
+                                    <Image src={item.image} h="4rem" objectFit={'contain'} />
                                 </GridItem>
                             ))
                         ) : (
@@ -82,13 +82,13 @@ const FoodTab = props => {
                         h="200px"
                         w="100%"
                         templateColumns={{
-                            base: 'repeat(4,1fr)',
-                            md: 'repeat(4,1fr)',
+                            base: 'repeat(3,1fr)',
+                            md: 'repeat(3,1fr)',
                         }}>
                         {vegetable ? (
                             vegetable.map(item => (
                                 <GridItem
-                                    w="80px"
+                                    w="100px"
                                     mb="0.75rem"
                                     pr="0.2rem"
                                     key={item.id}
@@ -99,7 +99,7 @@ const FoodTab = props => {
                                     }}
                                     opacity={clickItem === item.id && 0.5}>
                                     <Text fontSize={'xs'}>{item.name}</Text>
-                                    <Image src={item.image} h="3rem" objectFit={'contain'} />
+                                    <Image src={item.image} h="4rem" objectFit={'contain'} />
                                 </GridItem>
                             ))
                         ) : (
@@ -113,13 +113,13 @@ const FoodTab = props => {
                         h="200px"
                         w="100%"
                         templateColumns={{
-                            base: 'repeat(4,1fr)',
-                            md: 'repeat(4,1fr)',
+                            base: 'repeat(3,1fr)',
+                            md: 'repeat(3,1fr)',
                         }}>
                         {fruit ? (
                             fruit.map(item => (
                                 <GridItem
-                                    w="80px"
+                                    w="100px"
                                     mb="0.75rem"
                                     pr="0.2rem"
                                     key={item.id}
@@ -130,7 +130,7 @@ const FoodTab = props => {
                                     }}
                                     opacity={clickItem === item.id && 0.5}>
                                     <Text fontSize={'xs'}>{item.name}</Text>
-                                    <Image src={item.image} h="3rem" objectFit={'contain'} />
+                                    <Image src={item.image} h="4rem" objectFit={'contain'} />
                                 </GridItem>
                             ))
                         ) : (
@@ -144,13 +144,13 @@ const FoodTab = props => {
                         h="200px"
                         w="100%"
                         templateColumns={{
-                            base: 'repeat(4,1fr)',
-                            md: 'repeat(4,1fr)',
+                            base: 'repeat(3,1fr)',
+                            md: 'repeat(3,1fr)',
                         }}>
                         {bread ? (
                             bread.map(item => (
                                 <GridItem
-                                    w="80px"
+                                    w="100px"
                                     mb="0.75rem"
                                     pr="0.2rem"
                                     key={item.id}
@@ -161,7 +161,7 @@ const FoodTab = props => {
                                     }}
                                     opacity={clickItem === item.id && 0.5}>
                                     <Text fontSize={'xs'}>{item.name}</Text>
-                                    <Image src={item.image} h="3rem" objectFit={'contain'} />
+                                    <Image src={item.image} h="4rem" objectFit={'contain'} />
                                 </GridItem>
                             ))
                         ) : (

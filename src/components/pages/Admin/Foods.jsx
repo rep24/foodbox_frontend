@@ -8,14 +8,21 @@ import useFoods from '@/hooks/useFoods'
 
 const Foods = () => {
     const { foodIndex, foods } = useFoods()
-    const { deleteFood } = useAdmin()
+    const { deleteFood, onSelectTarget, selectedTarget } = useAdmin()
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [deleted, setdeleted] = useState(false)
+    const [Open, Close] = useState(false)
 
     useEffect(() => {
+        Close(false)
         setdeleted(false)
         foodIndex()
-    }, [deleted])
+    }, [deleted, Open])
+
+    const onClickEdit = id => {
+        onSelectTarget(id, onOpen, foods)
+        onOpen()
+    }
 
     return (
         <>
@@ -38,13 +45,27 @@ const Foods = () => {
                                         カテゴリーID: {food.category_id}
                                     </Text>
                                     <Flex>
-                                        <Text color="#11B7DA" fontWeight="bold" mr={3}>
+                                        <Text
+                                            color="#11B7DA"
+                                            fontWeight="bold"
+                                            mr={3}
+                                            cursor="pointer"
+                                            onClick={() => {
+                                                onClickEdit(
+                                                    food.id,
+                                                    food.name,
+                                                    food.image,
+                                                    food.category_id,
+                                                    food.parent_id,
+                                                )
+                                            }}>
                                             編集
                                         </Text>
                                         <Text
                                             color="#FF3975"
                                             fontWeight="bold"
                                             cursor="pointer"
+                                            mr="1rem"
                                             onClick={() => {
                                                 deleteFood(food.id)
                                                 setdeleted(true)
@@ -72,7 +93,7 @@ const Foods = () => {
                 <Image src="/images/plus.png" h="3rem" />
             </Tooltip>
 
-            <AdminFoodModal isOpen={isOpen} onClose={onClose} />
+            <AdminFoodModal isOpen={isOpen} onClose={onClose} selectedTarget={selectedTarget} Close={Close} />
         </>
     )
 }
