@@ -1,88 +1,23 @@
-import PrimaryModal from '@/components/atoms/PrimaryModal'
-import useFoods from '@/hooks/useFoods'
-import {
-    Button,
-    Drawer,
-    DrawerBody,
-    DrawerCloseButton,
-    DrawerContent,
-    DrawerFooter,
-    DrawerHeader,
-    DrawerOverlay,
-    Image,
-    Tab,
-    TabList,
-    TabPanel,
-    TabPanels,
-    Tabs,
-    useDisclosure,
-} from '@chakra-ui/react'
-import { useEffect, useRef } from 'react'
+import HeaderLayout from '@/components/template/HeaderLayout'
+import { Center, Image, Text, useColorModeValue } from '@chakra-ui/react'
+import Link from 'next/link'
 
 const NotFoundPage = () => {
-    const { isOpen, onOpen, onClose } = useDisclosure()
-    const { createFood, foodIndex, foods } = useFoods()
-    const btnRef = useRef()
-
-    useEffect(() => {
-        foodIndex()
-        console.log(foods)
-    }, [foodIndex])
-
     return (
-        <>
-            <Button ref={btnRef} colorScheme="teal" onClick={onOpen}>
-                食材選択
-            </Button>
-            <Drawer isOpen={isOpen} placement="top" onClose={onClose} finalFocusRef={btnRef}>
-                <DrawerOverlay />
-                <DrawerContent>
-                    <DrawerCloseButton />
-                    <DrawerHeader>食材を選択してください</DrawerHeader>
-
-                    <DrawerBody>
-                        <Tabs h="400px" isFitted variant="enclosed">
-                            <TabList>
-                                <Tab>肉</Tab>
-                                <Tab>魚</Tab>
-                                <Tab>野菜</Tab>
-                            </TabList>
-
-                            <TabPanels>
-                                <TabPanel>
-                                    {foods ? (
-                                        foods.map(item => (
-                                            <>
-                                                <option key={item.id} value={item.id}>
-                                                    {item.name}
-                                                </option>
-                                                <Image src={item.image} w="5rem" />
-                                            </>
-                                        ))
-                                    ) : (
-                                        <option></option>
-                                    )}
-                                </TabPanel>
-                                <TabPanel>
-                                    <p>two!</p>
-                                </TabPanel>
-                                <TabPanel>
-                                    <p>three!</p>
-                                </TabPanel>
-                            </TabPanels>
-                        </Tabs>
-                    </DrawerBody>
-
-                    <DrawerFooter>
-                        <Button variant="outline" mr={3} onClick={onClose}>
-                            Cancel
-                        </Button>
-                        <Button colorScheme="blue">Save</Button>
-                    </DrawerFooter>
-                </DrawerContent>
-            </Drawer>
-            <PrimaryModal />
-        </>
+        <HeaderLayout>
+            <Center mt="70px" flexDirection={'column'}>
+                <Text color={useColorModeValue('gray.600', 'purple.50')} fontWeight="bold" fontSize="3.5rem" mb="2">
+                    ４０４
+                </Text>
+                <Text ml="3px">お探しのページは見つかりませんでした...。</Text>
+                <Image src="https://uploads-ssl.webflow.com/603c87adb15be3cb0b3ed9b5/6056eb9b4dfc7f31c781799c_46-p-500.png" />
+                <Link href="/">
+                    <Text as="a" fontSize="sl" borderBottom="1px solid gray" cursor="pointer">
+                        トップへ戻る
+                    </Text>
+                </Link>
+            </Center>
+        </HeaderLayout>
     )
 }
 

@@ -1,6 +1,7 @@
 import {
     Box,
     Center,
+    Flex,
     FormControl,
     FormErrorMessage,
     FormLabel,
@@ -16,6 +17,8 @@ import { useRouter } from 'next/router'
 import { useAuth } from '@/hooks/auth'
 import { useForm } from 'react-hook-form'
 import HeaderLayout from '@/components/template/HeaderLayout'
+import Link from 'next/link'
+import { BiRun } from 'react-icons/bi'
 
 const Login = memo(() => {
     const router = useRouter()
@@ -62,7 +65,7 @@ const Login = memo(() => {
                     textAlign="left"
                     p="5rem">
                     <Wrap>
-                        <Center mt="70px" mb="70px">
+                        <Center mb="70px" flexDirection={'column'}>
                             <Text
                                 color={useColorModeValue('gray.600', 'purple.50')}
                                 fontWeight="bold"
@@ -70,9 +73,25 @@ const Login = memo(() => {
                                 mb="2">
                                 食材の管理を始めましょう！
                             </Text>
+                            <Link href="/register">
+                                <Flex
+                                    mt="2rem"
+                                    borderBottom={useColorModeValue('3px solid #595959', '3px solid white')}
+                                    _hover={{ opacity: 0.7 }}>
+                                    <BiRun size="27" />
+                                    <Text
+                                        fontWeight={'bold'}
+                                        fontSize="1.25rem"
+                                        color={useColorModeValue('gray.600', 'purple.50')}
+                                        ml="1"
+                                        cursor="pointer">
+                                        今から始める<small>(新規登録)</small>
+                                    </Text>
+                                </Flex>
+                            </Link>
                         </Center>
 
-                        <Center>
+                        <Center flexDirection="column">
                             <Box
                                 width="50%"
                                 bg="rgba(255,255,255,0.9)"
@@ -124,6 +143,16 @@ const Login = memo(() => {
                                             height={'50px'}>
                                             ログイン
                                         </PrimaryButton>
+                                        <Link href="/forget">
+                                            <Text
+                                                as="a"
+                                                fontSize="sm"
+                                                borderBottom="1px solid gray"
+                                                cursor="pointer"
+                                                mt="2rem">
+                                                パスワードを忘れた方はこちら
+                                            </Text>
+                                        </Link>
                                     </Center>
                                 </form>
                             </Box>

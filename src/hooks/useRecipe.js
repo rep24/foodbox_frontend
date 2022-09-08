@@ -17,17 +17,15 @@ const useRecipe = () => {
             })
     }, [])
 
-    const getSuggestRecipe = useCallback(() => {
-        setTimeout(() => {
-            axios
-                .get(process.env.NEXT_PUBLIC_API_KEY2)
-                .then(res => {
-                    setSuggestRecipe(res.data.result)
-                })
-                .catch(err => {
-                    console.log(err)
-                })
-        }, 2000)
+    const getSuggestRecipe = useCallback(async (parentId, categoryId) => {
+        await axios
+            .get(`${process.env.NEXT_PUBLIC_API_KEY2}${parentId}-${categoryId}`)
+            .then(res => {
+                setSuggestRecipe(res.data.result)
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }, [])
 
     return { getRankerRecipe, rankerRecipe, getSuggestRecipe, suggestRecipe }

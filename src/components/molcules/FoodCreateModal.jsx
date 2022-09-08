@@ -13,6 +13,7 @@ const FoodCreateModal = props => {
     const { isOpen, onClose, Close } = props
 
     const [clickItem, setClickItem] = useState()
+
     const { user } = useAuth()
 
     const { createFood, foodIndex, beef, fish, vegetable, bread, fruit } = useFoods()
@@ -26,11 +27,10 @@ const FoodCreateModal = props => {
     } = useForm()
 
     useEffect(() => {
-        console.log('エフェクト！')
         setClickItem()
         reset()
         foodIndex()
-    }, [reset, foodIndex, props])
+    }, [reset, foodIndex])
 
     //登録ボタンを押したときの処理
     const onSubmitNew = data => {

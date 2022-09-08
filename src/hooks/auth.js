@@ -60,19 +60,21 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
                 })
             })
     }
-    const forgotPassword = async ({ setErrors, setStatus, email }) => {
+    const forgotPassword = async ({ setError, setStatus, ...props }) => {
         await csrf()
-
-        setErrors([])
-        setStatus(null)
+        console.log(props)
+        setError([])
+        setStatus('お待ちください...')
 
         axios
-            .post('/forgot-password', { email })
-            .then(response => setStatus(response.data.status))
+            .post('/forgot-password', props)
+            .then(response => {
+                setStatus('メールを送信しました！')
+            })
             .catch(error => {
                 if (error.response.status !== 422) throw error
 
-                setErrors(Object.values(error.response.data.errors).flat())
+                setError(error.response.data.errors)
             })
     }
 

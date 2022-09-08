@@ -1,18 +1,31 @@
-import { useEffect, memo } from 'react'
+import { useEffect, useLayoutEffect } from 'react'
 
 import { Box, Center, Grid, Spinner, Text, useColorModeValue } from '@chakra-ui/react'
 
 import RecipeCard from '../atoms/RecipeCard'
 import Wrap from '../template/Wrap'
 import useRecipe from '../../hooks/useRecipe'
+import { useAuth } from '@/hooks/auth'
+import useBox from '../../hooks/useBox'
 
-const Recipe = memo(() => {
+const Recipe = () => {
     const { getRankerRecipe, rankerRecipe, getSuggestRecipe, suggestRecipe } = useRecipe()
+    const { user } = useAuth()
+    const { getBox, firstCategoryId, firstParentId, loading } = useBox()
 
-    useEffect(() => {
+    const test = async () => {
+        if (firstCategoryId !== '') {
+            setTimeout(async () => {
+                await getSuggestRecipe(firstParentId, firstCategoryId)
+            }, 2000)
+        }
+    }
+
+    useLayoutEffect(() => {
         getRankerRecipe()
-        getSuggestRecipe()
-    }, [])
+        user ? getBox(user.id) : loading
+        test()
+    }, [firstCategoryId])
 
     return (
         <Wrap>
@@ -49,7 +62,7 @@ const Recipe = memo(() => {
                     )}
                 </Grid>
                 <Text color={useColorModeValue('gray.600', 'purple.50')} fontWeight="bold" fontSize="3xl" mb="2" mt="4">
-                    あなたにおすすめのレシピ(とりあえず今は牛肉)
+                    あなたにおすすめのレシピ(賞味期限が迫っている食材を使ったレシピ)
                 </Text>
                 <Grid
                     templateColumns={{
@@ -81,6 +94,6 @@ const Recipe = memo(() => {
             </Box>
         </Wrap>
     )
-})
+}
 
 export default Recipe

@@ -7,7 +7,7 @@ const HomeButton = memo(props => {
     const { onClick } = props
     return (
         <Tooltip
-            label="ログインする"
+            label="ログイン"
             hasArrow
             fontSize="0.75rem"
             fontWeight="bold"
@@ -18,7 +18,7 @@ const HomeButton = memo(props => {
             mr="0.7rem">
             <IconButton
                 icon={<FaDoorClosed size={24} />}
-                aria-label="ログアウト"
+                aria-label="ログイン"
                 variant="unstyled"
                 _hover={{ top: '-1' }}
                 onClick={onClick}

@@ -40,7 +40,7 @@ const Login = memo(() => {
 
     return (
         <HeaderLayout>
-            <Box h="100vh" w="100%" objectFit="cover" bgRepeat="no-repeat" backgroundImage="/images/bg1.jpg">
+            <Box h="100vh" w="100vw" objectFit="cover" bgRepeat="no-repeat" backgroundImage="/images/bg1.jpg">
                 <Box
                     h="100%"
                     bgGradient={useColorModeValue(

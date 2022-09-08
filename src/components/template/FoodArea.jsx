@@ -23,7 +23,7 @@ const FoodArea = memo(() => {
     useLayoutEffect(() => {
         Close(false)
         user ? getBox(user.id) : loading
-    }, [getBox, Open])
+    }, [box, Open])
 
     const onClickFood = useCallback(
         id => {

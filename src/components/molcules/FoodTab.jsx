@@ -1,4 +1,4 @@
-import { Box, Grid, GridItem, Image, Tab, TabList, TabPanel, TabPanels, Tabs, Text } from '@chakra-ui/react'
+import { Grid, GridItem, Image, Tab, TabList, TabPanel, TabPanels, Tabs, Text } from '@chakra-ui/react'
 
 const FoodTab = props => {
     const { clickItem, setClickItem, setValue, beef, fish, vegetable, fruit, bread } = props

@@ -66,11 +66,6 @@ const Header = memo(props => {
                             ) : (
                                 <>
                                     <LoginButton onClick={() => router.push('/')} />
-                                    <Link href="/register">
-                                        <Text as="a" fontSize="sm" borderBottom="1px solid white" cursor="pointer">
-                                            新規登録はこちら
-                                        </Text>
-                                    </Link>
                                 </>
                             )}
                         </Box>
