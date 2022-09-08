@@ -20,15 +20,6 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
             }),
     )
 
-    const { data: users } = useSWR('/api/users', () =>
-        axios
-            .get('/api/users')
-            .then(res => res.data)
-            .catch(error => {
-                console.log(error)
-            }),
-    )
-
     const csrf = () => axios.get('/sanctum/csrf-cookie')
 
     const regist = async ({ ...props }) => {
@@ -68,7 +59,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
 
         axios
             .post('/forgot-password', props)
-            .then(response => {
+            .then(() => {
                 setStatus('メールを送信しました！')
             })
             .catch(error => {
@@ -115,7 +106,6 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
 
     return {
         user,
-        users,
         regist,
         login,
         forgotPassword,

@@ -6,10 +6,12 @@ import { useForm } from 'react-hook-form'
 import useContact from '../../hooks/useContact'
 import PrimaryButton from '../atoms/PrimaryButton'
 import PrimaryModal from '../atoms/PrimaryModal'
+import { useAuth } from '@/hooks/auth'
 
 const ContactModal = props => {
     const { isOpen, onClose } = props
     const { contact } = useContact()
+    const { user } = useAuth()
 
     const {
         handleSubmit,
@@ -23,7 +25,7 @@ const ContactModal = props => {
     }, [props])
 
     const onSubmitContact = data => {
-        contact({ user_id: 1, body: data.body })
+        contact({ user_id: user.id, body: data.body })
         onClose()
     }
 

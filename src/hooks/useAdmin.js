@@ -8,6 +8,7 @@ const useAdmin = () => {
     const { showMessage } = useMessage()
 
     const [selectedTarget, setSelectedTarget] = useState(null)
+    const [users, setUsers] = useState()
 
     const onSelectTarget = useCallback((id, onOpen, AllData) => {
         const targetData = AllData.find(data => {
@@ -16,6 +17,15 @@ const useAdmin = () => {
         setSelectedTarget(targetData ?? null)
         onOpen()
     })
+
+    const getUsers = useCallback(() =>
+        axios
+            .get('/api/users')
+            .then(res => setUsers(res.data))
+            .catch(error => {
+                console.log(error)
+            }),
+    )
 
     const createFood = useCallback(
         async (name, image, categoryId, parentId) => {
@@ -62,7 +72,23 @@ const useAdmin = () => {
         [showMessage],
     )
 
-    return { deleteFood, createFood, editFood, onSelectTarget, selectedTarget }
+    const editUser = useCallback(async props => {
+        const { id, email } = props
+
+        axios
+            .put(`/api/users/${id}`, { email: email })
+            .then(() => {
+                showMessage({
+                    title: '編集しました!',
+                    status: 'info',
+                })
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    })
+
+    return { deleteFood, createFood, editFood, onSelectTarget, selectedTarget, editUser, getUsers, users }
 }
 
 export default useAdmin

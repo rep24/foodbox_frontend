@@ -19,6 +19,7 @@ const AdminFoodModal = props => {
 
     const { editFood } = useAdmin()
 
+    const [id, setId] = useState('')
     const [food, setFood] = useState('')
     const [image, setImage] = useState('')
     const [categoryId, setCategoryId] = useState('')
@@ -26,11 +27,12 @@ const AdminFoodModal = props => {
 
     useEffect(() => {
         reset()
+        setId(selectedTarget?.id ?? '')
         setFood(selectedTarget?.name ?? '')
         setImage(selectedTarget?.image ?? '')
         setCategoryId(selectedTarget?.category_id ?? '')
         setParentId(selectedTarget?.parent_id ?? '')
-    }, [selectedTarget])
+    }, [selectedTarget, id])
 
     const onChangeFood = e => {
         setFood(e.target.value)
@@ -62,7 +64,7 @@ const AdminFoodModal = props => {
             <Image boxSize="80%" m="auto" borderRadius="5px" src={image} />
             <form onSubmit={handleSubmit(onSubmit)}>
                 <FormControl isInvalid={errors.id}>
-                    <Input type="hidden" id="id" value={'1'} {...register('id')} />
+                    <Input type="hidden" id="id" value={id} {...register('id')} />
                 </FormControl>
                 <ModalBody>
                     <Stack spacing={4}>
