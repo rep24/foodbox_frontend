@@ -38,6 +38,7 @@ const ContactModal = props => {
                             <FormLabel>お問い合わせ内容を入力してください。</FormLabel>
 
                             <Textarea
+                                label="Contact"
                                 id="body"
                                 {...register('body', {
                                     required: '内容は必須です。',

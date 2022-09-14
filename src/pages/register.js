@@ -121,7 +121,7 @@ const Login = memo(() => {
                                             <FormLabel>Confirm password</FormLabel>
                                             <Input
                                                 id="passwordConfirmation"
-                                                type="passwordConfirmation"
+                                                type="password"
                                                 bg="white"
                                                 onChange={event => setPassword(event.target.value)}
                                                 {...register('passwordConfirmation', {

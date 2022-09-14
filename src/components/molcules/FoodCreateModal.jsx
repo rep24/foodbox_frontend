@@ -34,7 +34,6 @@ const FoodCreateModal = props => {
 
     //登録ボタンを押したときの処理
     const onSubmitNew = data => {
-        console.log(data.food)
         createFood({
             user_id: user.id,
             food_id: data.food,

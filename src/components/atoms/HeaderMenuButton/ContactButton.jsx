@@ -14,8 +14,11 @@ const ContactButton = memo(props => {
             bg={useColorModeValue('#79bd9a', 'cyan.300')}
             color={useColorModeValue('white', 'gray.800')}
             mt="0.9rem"
-            p="0.5rem">
+            p="0.5rem"
+            display={{ base: 'none', md: 'block' }}>
             <IconButton
+                bg={{ base: useColorModeValue('orange.400', 'purple.900'), md: 'none' }}
+                borderRadius={{ base: '100%', md: 'none' }}
                 onClick={onOpen}
                 icon={<ChatIcon fontSize="xl" />}
                 aria-label="お問い合わせ"

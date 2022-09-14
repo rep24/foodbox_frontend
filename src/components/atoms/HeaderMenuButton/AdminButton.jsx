@@ -15,7 +15,8 @@ const AdminButton = memo(props => {
             color={useColorModeValue('white', 'gray.800')}
             p="0.5rem"
             mt="0.79rem"
-            mr="0.7rem">
+            mr="0.7rem"
+            display={{ base: 'none', md: 'block' }}>
             <IconButton
                 icon={<RiKey2Fill size={20} color={'#ff0000'} />}
                 aria-label="レシピ"

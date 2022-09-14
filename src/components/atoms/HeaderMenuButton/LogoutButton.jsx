@@ -15,8 +15,12 @@ const HomeButton = memo(props => {
             color={useColorModeValue('white', 'gray.800')}
             p="0.5rem"
             mt="0.9rem"
-            mr="0.7rem">
+            mr="0.7rem"
+            display={{ base: 'none', md: 'block' }}>
             <IconButton
+                bg={{ base: useColorModeValue('orange.400', 'purple.900'), md: 'none' }}
+                borderRadius={{ base: '100%', md: 'none' }}
+                pl={{ base: '0.5rem', md: '0' }}
                 icon={<FaDoorOpen size={24} />}
                 aria-label="ログアウト"
                 variant="unstyled"

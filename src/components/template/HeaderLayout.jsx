@@ -1,4 +1,5 @@
 import { memo } from 'react'
+import Footer from '../organisms/Footer'
 
 import Header from '../organisms/Header'
 
@@ -8,6 +9,7 @@ const HeaderLayout = memo(props => {
         <>
             <Header setPage={setPage} />
             {children}
+            <Footer setPage={setPage} />
         </>
     )
 })

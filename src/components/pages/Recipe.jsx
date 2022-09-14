@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect } from 'react'
+import { useEffect } from 'react'
 
 import { Box, Center, Grid, Spinner, Text, useColorModeValue } from '@chakra-ui/react'
 
@@ -21,7 +21,7 @@ const Recipe = () => {
         }
     }
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         getRankerRecipe()
         user ? getBox(user.id) : loading
         test()
@@ -29,8 +29,12 @@ const Recipe = () => {
 
     return (
         <Wrap>
-            <Box margin="auto">
-                <Text color={useColorModeValue('gray.600', 'purple.50')} fontWeight="bold" fontSize="3xl" mb="2">
+            <Box mx="auto" px={{ base: '1rem' }}>
+                <Text
+                    color={useColorModeValue('gray.600', 'purple.50')}
+                    fontWeight="bold"
+                    fontSize={{ base: '1.5rem', md: '2rem' }}
+                    mb="2">
                     人気のレシピ(外部サイト)
                 </Text>
 
@@ -41,7 +45,7 @@ const Recipe = () => {
                     }}
                     gap={{ base: 3, md: 5 }}
                     maxW="1080px"
-                    h={{ base: '400px', md: '500px' }}
+                    h={{ base: '320px', md: '500px' }}
                     m="auto"
                     overflow="auto">
                     {rankerRecipe ? (
@@ -61,7 +65,12 @@ const Recipe = () => {
                         </Center>
                     )}
                 </Grid>
-                <Text color={useColorModeValue('gray.600', 'purple.50')} fontWeight="bold" fontSize="3xl" mb="2" mt="4">
+                <Text
+                    color={useColorModeValue('gray.600', 'purple.50')}
+                    fontWeight="bold"
+                    fontSize={{ base: '1.5rem', md: '2rem' }}
+                    mb="2"
+                    mt="4">
                     あなたにおすすめのレシピ(賞味期限が迫っている食材を使ったレシピ)
                 </Text>
                 <Grid
@@ -71,7 +80,7 @@ const Recipe = () => {
                     }}
                     gap={{ base: 3, md: 6 }}
                     maxW="1080px"
-                    h={{ base: '600px', md: '400px' }}
+                    h={{ base: '320px', md: '500px' }}
                     m="auto"
                     overflow="auto">
                     {suggestRecipe ? (

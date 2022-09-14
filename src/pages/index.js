@@ -13,16 +13,16 @@ import {
 import Wrap from '../components/template/Wrap'
 import React, { memo, useEffect, useState } from 'react'
 import PrimaryButton from '../components/atoms/PrimaryButton'
-import { useRouter } from 'next/router'
+
 import { useAuth } from '@/hooks/auth'
 import { useForm } from 'react-hook-form'
 import HeaderLayout from '@/components/template/HeaderLayout'
 import Link from 'next/link'
 import { BiRun } from 'react-icons/bi'
+import { useRouter } from 'next/router'
 
 const Login = memo(() => {
     const router = useRouter()
-
     const { login } = useAuth({
         middleware: 'guest',
         redirectIfAuthenticated: '/home',
@@ -69,7 +69,7 @@ const Login = memo(() => {
                             <Text
                                 color={useColorModeValue('gray.600', 'purple.50')}
                                 fontWeight="bold"
-                                fontSize="3rem"
+                                fontSize={{ base: '1.5rem', md: '2.5rem' }}
                                 mb="2">
                                 食材の管理を始めましょう！
                             </Text>
@@ -81,7 +81,7 @@ const Login = memo(() => {
                                     <BiRun size="27" />
                                     <Text
                                         fontWeight={'bold'}
-                                        fontSize="1.25rem"
+                                        fontSize={{ base: '1rem', md: '1.25rem' }}
                                         color={useColorModeValue('gray.600', 'purple.50')}
                                         ml="1"
                                         cursor="pointer">
@@ -93,14 +93,14 @@ const Login = memo(() => {
 
                         <Center flexDirection="column">
                             <Box
-                                width="50%"
+                                width={{ base: '80%', md: '50%' }}
                                 bg="rgba(255,255,255,0.9)"
                                 color="gray.800"
                                 borderRadius="10"
-                                pr="2rem"
-                                pl="2rem"
-                                pt="3rem"
-                                pb="3rem">
+                                pr={{ base: '1rem', md: '2rem' }}
+                                pl={{ base: '1rem', md: '2rem' }}
+                                pt={{ base: '2rem', md: '3rem' }}
+                                pb={{ base: '2rem', md: '3rem' }}>
                                 <form onSubmit={handleSubmit(onSubmit)}>
                                     <Stack spacing={4} mb="40px">
                                         <FormControl isInvalid={errors.email}>
@@ -139,8 +139,8 @@ const Login = memo(() => {
                                             isLoading={isSubmitting}
                                             type="submit"
                                             bg="teal.400"
-                                            width={'180px'}
-                                            height={'50px'}>
+                                            width={{ base: '130px', md: '180px' }}
+                                            height={{ base: '35px', md: '50px' }}>
                                             ログイン
                                         </PrimaryButton>
                                         <Link href="/forget">
