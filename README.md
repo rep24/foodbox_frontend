@@ -1,4 +1,4 @@
-# FoodBox - Backend
+# FoodBox - Frontend
 Laravel × Next.js × MySql
 ## 概要
 このアプリケーションはユーザーが食べ物の賞味期限を登録することで、賞味期限を切らしてしまったり、不必要な食材を購入してしまうことを防ぎます。
