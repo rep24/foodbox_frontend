@@ -71,6 +71,10 @@ const FoodEditModal = props => {
                                 value={deadline}
                                 {...register('deadline', {
                                     required: '賞味期限は必須です。',
+                                    pattern: {
+                                        value: /\d{4}\-\d{2}\-\d{2}/,
+                                        message: '正しい日付を入力してください。',
+                                    },
                                 })}
                                 onChange={onChangeDeadline}
                                 bg="green.100"

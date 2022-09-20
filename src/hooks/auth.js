@@ -53,7 +53,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
     }
     const forgotPassword = async ({ setError, setStatus, ...props }) => {
         await csrf()
-        console.log(props)
+
         setError([])
         setStatus('お待ちください...')
 

@@ -8,6 +8,7 @@ import PrimaryModal from '../atoms/PrimaryModal'
 import useFoods from '../../hooks/useFoods'
 import { useAuth } from '@/hooks/auth'
 import FoodTab from './FoodTab'
+import useMessage from '@/hooks/useMessage'
 
 const FoodCreateModal = props => {
     const { isOpen, onClose, Close } = props
@@ -17,6 +18,8 @@ const FoodCreateModal = props => {
     const { user } = useAuth()
 
     const { createFood, foodIndex, beef, fish, vegetable, bread, fruit } = useFoods()
+
+    const { showMessage } = useMessage()
 
     const {
         handleSubmit,
@@ -30,16 +33,20 @@ const FoodCreateModal = props => {
         setClickItem()
         reset()
         foodIndex()
-    }, [reset, foodIndex])
+    }, [reset, foodIndex, props])
 
     //登録ボタンを押したときの処理
     const onSubmitNew = data => {
-        createFood({
-            user_id: user.id,
-            food_id: data.food,
-            deadline: data.deadline,
-            memo: data.memo,
-        })
+        if (!clickItem) {
+            showMessage({ title: '食材が選択されませんでした...', status: 'info' })
+        } else {
+            createFood({
+                user_id: user.id,
+                food_id: data.food,
+                deadline: data.deadline,
+                memo: data.memo,
+            })
+        }
         reset()
         onClose()
         Close(true)
@@ -69,6 +76,10 @@ const FoodCreateModal = props => {
                                 placeholder="2022-01-01"
                                 {...register('deadline', {
                                     required: '賞味期限は必須です。',
+                                    pattern: {
+                                        value: /\d{4}\-\d{2}\-\d{2}/,
+                                        message: '正しい日付を入力してください。',
+                                    },
                                 })}
                                 bg="green.100"
                                 border="none"
@@ -83,7 +94,7 @@ const FoodCreateModal = props => {
                                 {...register('memo', {
                                     maxLength: {
                                         value: 200,
-                                        message: 'メモが長すぎます！',
+                                        message: 'メモが長すぎます。',
                                     },
                                 })}
                                 bg="green.100"

@@ -1,88 +1,55 @@
-# Laravel Breeze - Next.js Edition 🏝️
+# FoodBox - Backend
+Laravel × Next.js × MySql
+## 概要
+このアプリケーションはユーザーが食べ物の賞味期限を登録することで、賞味期限を切らしてしまったり、不必要な食材を購入してしまうことを防ぎます。
+また、楽天APIを活用して賞味期限が迫っている食材を利用したレシピを表示することにより、献立やお買い物にも有効に働きます。
 
-## Introduction
+## 主な構成
+１.フロントエンド
+- Next.js(JavaScript)
+- Chakra-UI
 
-This repository is an implementing of the [Laravel Breeze](https://laravel.com/docs/starter-kits) application / authentication starter kit frontend in [Next.js](https://nextjs.org). All of the authentication boilerplate is already written for you - powered by [Laravel Sanctum](https://laravel.com/docs/sanctum), allowing you to quickly begin pairing your beautiful Next.js frontend with a powerful Laravel backend.
+２.バックエンド
+- Laravel
+- Laravel Breeze API
 
-## Official Documentation
+３.データベース
+- MySql
+## プロジェクトの立ち上げ方
+## フロントエンド
+フロントエンドはNext.jsで構築しているため、NodeJsがPCにインストールされていることが前提です。
+クローンしたディレクトリで、下記のコマンドを実行してください。
+localhost:3000でサーバーが立ち上がります。
+$ npm install
+$ npm run dev
+## 環境設定 - フロントエンド
+.env.localファイルを作成し、下記の通り記述します。
 
-### Installation
+NEXT_PUBLIC_BACKEND_URL= バックエンド(Laravel)側のURL
+NEXT_PUBLIC_API_KEY1= 楽天レシピカテゴリ別ランキングAPIのリクエストURL
+NEXT_PUBLIC_API_KEY2= 楽天レシピカテゴリ一覧APIのリクエストURL『categoryId=』まで
 
-First, create a Next.js compatible Laravel backend by installing Laravel Breeze into a [fresh Laravel application](https://laravel.com/docs/installation) and installing Breeze's API scaffolding:
+## バックエンド
+バックエンドはLaravelで構築したAPIサーバーです。
+## 環境設定 - バックエンド
+.envファイルを作成し、下記の通り記述します。
+(その他の項目はご自身の環境に合わせて設定してください。)
 
-```bash
-# Create the Laravel application...
-laravel new next-backend
+FRONTEND_URL=フロントエンド(Next.js)側のURL
+DB_CONNECTION=mysql
+DB_DATABASE=foodbox
+## DB
+DBにはMySqlを使用してください。
+データベース : foodbox
+テーブル : バックエンド側に入っているSQLをインポートしてご利用ください。
+## テストアカウント
+１.管理者
+- email : admin@example.com
+- pwd : admin123
 
-cd next-backend
+２.ユーザー
+- email : user@example.com
+- pwd : test1234
 
-# Install Breeze and dependencies...
-composer require laravel/breeze
-
-php artisan breeze:install api
-```
-
-Next, ensure that your application's `APP_URL` and `FRONTEND_URL` environment variables are set to `http://localhost:8000` and `http://localhost:3000`, respectively.
-
-After defining the appropriate environment variables, you may serve the Laravel application using the `serve` Artisan command:
-
-```bash
-# Serve the application...
-php artisan serve
-```
-
-Next, clone this repository and install its dependencies with `yarn install` or `npm install`. Then, copy the `.env.example` file to `.env.local` and supply the URL of your backend:
-
-```
-NEXT_PUBLIC_BACKEND_URL=http://localhost:8000
-```
-
-Finally, run the application via `npm run dev`. The application will be available at `http://localhost:3000`:
-
-```
-npm run dev
-```
-
-> Note: Currently, we recommend using `localhost` during local development of your backend and frontend to avoid CORS "Same-Origin" issues.
-
-### Authentication Hook
-
-This Next.js application contains a custom `useAuth` React hook, designed to abstract all authentication logic away from your pages. In addition, the hook can be used to access the currently authenticated user:
-
-```js
-const ExamplePage = () => {
-    const { logout, user } = useAuth({ middleware: 'auth' })
-
-    return (
-        <>
-            <p>{user?.name}</p>
-
-            <button onClick={logout}>Sign out</button>
-        </>
-    )
-}
-
-export default ExamplePage
-```
-
-> Note: You will need to use [optional chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining) (`user?.name` instead of `user.name`) when accessing properties on the user object to account for Next.js's initial server-side render.
-
-### Named Routes
-
-For convenience, [Ziggy](https://github.com/tighten/ziggy#spas-or-separate-repos) may be used to reference your Laravel application's named route URLs from your React application.
-
-## Contributing
-
-Thank you for considering contributing to Breeze Next! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-Please review [our security policy](https://github.com/laravel/breeze-next/security/policy) on how to report security vulnerabilities.
-
-## License
-
-Laravel Breeze Next is open-sourced software licensed under the [MIT license](LICENSE.md).
+##### バックエンドのリポジトリはこちら
+url

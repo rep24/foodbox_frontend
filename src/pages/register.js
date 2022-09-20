@@ -109,6 +109,10 @@ const Login = memo(() => {
                                                 onChange={event => setPassword(event.target.value)}
                                                 {...register('password', {
                                                     required: 'passwordは必須です。',
+                                                    minLength: {
+                                                        value: 8,
+                                                        message: 'パスワードは8文字以上必要です。',
+                                                    },
                                                 })}
                                                 autoComplete="current-password"
                                             />

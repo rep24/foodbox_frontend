@@ -24,7 +24,7 @@ const Users = () => {
                 {users ? (
                     users.map(user => (
                         <Flex pb={2} key={user.id}>
-                            <Box w="100%" borderBottom="1px solid #11B7DA">
+                            <Box w="100%" h="4.5rem" borderBottom="1px solid #11B7DA">
                                 <Flex color="white" textAlign="center" alignItems="end">
                                     <Text fontSize={'2xl'} mr={6}>
                                         ID: {user.id}

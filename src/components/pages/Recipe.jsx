@@ -29,78 +29,76 @@ const Recipe = () => {
 
     return (
         <Wrap>
-            <Box mx="auto" px={{ base: '1rem' }}>
-                <Text
-                    color={useColorModeValue('gray.600', 'purple.50')}
-                    fontWeight="bold"
-                    fontSize={{ base: '1.5rem', md: '2rem' }}
-                    mb="2">
-                    人気のレシピ(外部サイト)
-                </Text>
+            <Text
+                color={useColorModeValue('gray.600', 'purple.50')}
+                fontWeight="bold"
+                fontSize={{ base: '1.5rem', md: '2rem' }}
+                mb="2">
+                人気のレシピ(外部サイト)
+            </Text>
 
-                <Grid
-                    templateColumns={{
-                        base: 'repeat(4,1fr)',
-                        md: 'repeat(4,1fr)',
-                    }}
-                    gap={{ base: 3, md: 5 }}
-                    maxW="1080px"
-                    h={{ base: '320px', md: '500px' }}
-                    m="auto"
-                    overflow="auto">
-                    {rankerRecipe ? (
-                        rankerRecipe.map(data => (
-                            <RecipeCard
-                                key={data.rank}
-                                rank={data.rank}
-                                title={data.recipeTitle}
-                                image={data.foodImageUrl}
-                                url={data.recipeUrl}
-                                text={data.recipeDescription}
-                            />
-                        ))
-                    ) : (
-                        <Center h="30vh" w="100vh">
-                            <Spinner color="orange.500" size="xl" />
-                        </Center>
-                    )}
-                </Grid>
-                <Text
-                    color={useColorModeValue('gray.600', 'purple.50')}
-                    fontWeight="bold"
-                    fontSize={{ base: '1.5rem', md: '2rem' }}
-                    mb="2"
-                    mt="4">
-                    あなたにおすすめのレシピ(賞味期限が迫っている食材を使ったレシピ)
-                </Text>
-                <Grid
-                    templateColumns={{
-                        base: 'repeat(4,1fr)',
-                        md: 'repeat(4,1fr)',
-                    }}
-                    gap={{ base: 3, md: 6 }}
-                    maxW="1080px"
-                    h={{ base: '320px', md: '500px' }}
-                    m="auto"
-                    overflow="auto">
-                    {suggestRecipe ? (
-                        suggestRecipe.map(data => (
-                            <RecipeCard
-                                key={data.rank}
-                                rank={data.rank}
-                                title={data.recipeTitle}
-                                image={data.foodImageUrl}
-                                url={data.recipeUrl}
-                                text={data.recipeDescription}
-                            />
-                        ))
-                    ) : (
-                        <Center h="30vh" w="100vh">
-                            <Spinner color="orange.500" size="xl" />
-                        </Center>
-                    )}
-                </Grid>
-            </Box>
+            <Grid
+                templateColumns={{
+                    base: 'repeat(4,1fr)',
+                    md: 'repeat(4,1fr)',
+                }}
+                gap={{ base: 3, md: 5 }}
+                maxW="1080px"
+                h={{ base: '320px', md: '500px' }}
+                m="auto"
+                overflow="auto">
+                {rankerRecipe ? (
+                    rankerRecipe.map(data => (
+                        <RecipeCard
+                            key={data.rank}
+                            rank={data.rank}
+                            title={data.recipeTitle}
+                            image={data.foodImageUrl}
+                            url={data.recipeUrl}
+                            text={data.recipeDescription}
+                        />
+                    ))
+                ) : (
+                    <Center h="30vh" w="100vh">
+                        <Spinner color="orange.500" size="xl" />
+                    </Center>
+                )}
+            </Grid>
+            <Text
+                color={useColorModeValue('gray.600', 'purple.50')}
+                fontWeight="bold"
+                fontSize={{ base: '1.5rem', md: '2rem' }}
+                mb="2"
+                mt="4">
+                あなたにおすすめのレシピ(賞味期限が迫っている食材を使ったレシピ)
+            </Text>
+            <Grid
+                templateColumns={{
+                    base: 'repeat(4,1fr)',
+                    md: 'repeat(4,1fr)',
+                }}
+                gap={{ base: 3, md: 6 }}
+                maxW="1080px"
+                h={{ base: '320px', md: '500px' }}
+                m="auto"
+                overflow="auto">
+                {suggestRecipe ? (
+                    suggestRecipe.map(data => (
+                        <RecipeCard
+                            key={data.rank}
+                            rank={data.rank}
+                            title={data.recipeTitle}
+                            image={data.foodImageUrl}
+                            url={data.recipeUrl}
+                            text={data.recipeDescription}
+                        />
+                    ))
+                ) : (
+                    <Center h="30vh" w="100vh">
+                        <Spinner color="orange.500" size="xl" />
+                    </Center>
+                )}
+            </Grid>
         </Wrap>
     )
 }

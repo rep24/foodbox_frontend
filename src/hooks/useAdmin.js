@@ -28,7 +28,9 @@ const useAdmin = () => {
     )
 
     const createFood = useCallback(
-        async (name, image, categoryId, parentId) => {
+        async props => {
+            const { name, image, categoryId, parentId } = props
+            console.log(props)
             axios
                 .post(`/api/foods`, { name: name, image: image, category_id: categoryId, parent_id: parentId })
                 .then(() => {

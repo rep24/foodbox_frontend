@@ -5,6 +5,7 @@ import { Box, Flex, Grid, Image, Spinner, Text, Tooltip, useDisclosure } from '@
 import AdminFoodModal from '@/components/molcules/AdminFoodModal'
 import useAdmin from '@/hooks/useAdmin'
 import useFoods from '@/hooks/useFoods'
+import AdminFoodCreateModal from '@/components/molcules/AdminFoodCreateModal'
 
 const Foods = () => {
     const { foodIndex, foods } = useFoods()
@@ -19,7 +20,7 @@ const Foods = () => {
         foodIndex()
     }, [deleted, Open])
 
-    const onClickEdit = id => {
+    const onClickModal = id => {
         onSelectTarget(id, onOpen, foods)
         onOpen()
     }
@@ -31,7 +32,6 @@ const Foods = () => {
                     foods.map(food => (
                         <Flex borderBottom="1px solid #11B7DA" pb={2} key={food.id} mb={3}>
                             <Image w="7rem" marginRight="1" pr={3} src={food.image} objectFit="cover" />
-
                             <Box w="100%">
                                 <Flex color="white" textAlign="center" alignItems="end">
                                     <Text fontSize={'2xl'} fontWeight="bold" mr={6}>
@@ -51,7 +51,7 @@ const Foods = () => {
                                             mr={3}
                                             cursor="pointer"
                                             onClick={() => {
-                                                onClickEdit(
+                                                onClickModal(
                                                     food.id,
                                                     food.name,
                                                     food.image,
@@ -90,10 +90,20 @@ const Foods = () => {
                 color="white"
                 p="0.5rem"
                 mt="0.8rem">
-                <Image src="/images/plus.png" h="3rem" />
+                <Image
+                    src="/images/plus.png"
+                    h="3rem"
+                    onClick={() => {
+                        onClickModal()
+                    }}
+                    cursor="pointer"
+                />
             </Tooltip>
-
-            <AdminFoodModal isOpen={isOpen} onClose={onClose} selectedTarget={selectedTarget} Close={Close} />
+            {selectedTarget ? (
+                <AdminFoodModal isOpen={isOpen} onClose={onClose} selectedTarget={selectedTarget} Close={Close} />
+            ) : (
+                <AdminFoodCreateModal isOpen={isOpen} onClose={onClose} Close={Close} />
+            )}
         </>
     )
 }

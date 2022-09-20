@@ -1,4 +1,4 @@
-import { memo, useLayoutEffect, useState, useCallback } from 'react'
+import { memo, useState, useCallback, useEffect } from 'react'
 
 import { Box, Center, Grid, Spinner, useDisclosure } from '@chakra-ui/react'
 
@@ -20,7 +20,7 @@ const FoodArea = memo(() => {
 
     const [Open, Close] = useState(false)
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         Close(false)
         user ? getBox(user.id) : loading
     }, [Open])

@@ -54,12 +54,13 @@ const Login = memo(() => {
 
     return (
         <HeaderLayout>
-            <Box h="100vh" w="100%" objectFit="cover" bgRepeat="no-repeat" backgroundImage="/images/bg1.jpg">
+            <Box h="100vh" w="100%" bgRepeat="no-repeat" backgroundImage="/images/bg1.jpg" bgSize={'cover'}>
                 <Box
                     h="100%"
+                    w="100%"
                     bgGradient={useColorModeValue(
                         'linear(to-r,rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8))',
-                        'linear(to-r,rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8))',
+                        'linear(to-r,rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6))',
                     )}
                     alignItems="center"
                     textAlign="left"
